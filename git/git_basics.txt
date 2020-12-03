@@ -1,0 +1,81 @@
+Qs
+1 how to configure git basics?
+2 how to configure git with ssh?
+3 how to init repo?
+4 where are git files stored
+5 how to commit
+6 how to log and status
+7 how git works
+8 what are the three trees
+9 how git labels it's change sets (commits)
+10 how to stage files, unstage files
+11 how track files, untrack files
+12 view changes (in working and staged)
+13 delete, move and rename files
+14 shortcut to add and commit tracked file
+15 compare commits
+16 undo working directory changes
+17 ammend commits
+18 retrieve old versions
+19 revert commits
+20 remove untracked files
+21 how to ignore tracked files
+22 how to track empty directory
+
+As
+1
+git config --global user.email ''
+git config --global user.name ''
+
+2
+eval "$(ssh-agent -s)"
+ssh-add path_to_key
+git clone repo-ssh-url v git remote set-url origin repo-ssh-url
+
+3 git init
+
+4 .git directory
+
+5 git commit -m ""
+
+6 git log
+
+7 
+git is a distributed version control system
+different users maintain own repos, no central authority
+changes are stored (not versions) backward from latest change 
+
+8 
+repo, staging index, working directory
+repo <-add- staging index <-commit- working
+repo -checkout-> working
+
+9 
+generates checksum from files (SHA-1) that acts as a pointer (HEAD is the last pointer)
+blockchain
+
+10 git add filename, git reset HEAD filename
+
+11 automatically, unless in .gitignore, git rm filename (deletes), git rm --cached finename (removes from working)
+
+12 git diff, git diff --staged, git diff --color-words 
+
+13 git rm filename, git mv filename
+
+14 git commit -am ""
+
+15 git diff sha1...sha2
+
+16 git checkout -- fname
+
+17 git commit --amend -m ''
+
+18 git checkout sha1 -- fname
+
+19 git revert sha1
+
+20 git clean -n (dry run), git clean -f
+
+21 you have to untrack a file (with git rm --cached)
+
+22 put file (can be hidden) in directory

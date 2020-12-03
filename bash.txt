@@ -1,0 +1,19 @@
+Qs
+commands
+	1 how to replace string (a) in file, (b) in all files in dir, (c) in all files in subdirs?
+	2 
+
+
+
+As
+commands
+	1 	(a) %s/foo/loo/g 
+		(b) sed -i 's/apple/orange/g' 
+		(d) find ./ -type f -exec sed -i -e 's/apple/orange/g' {} \;
+
+	2
+Ms
+
+
+
+Fs

@@ -1,0 +1,100 @@
+Qs
+1 how does git know where HEAD points to
+2 what is ancestry
+3 what is tree and tree-ish
+4 what is blob 
+5 what does ls-tree do
+6 how to filter log
+7 how to create ^/v switch to another branch
+8 when can you not switch from a branch to another; what to do?
+9 how to see reachable ^ non-rechable branches?
+10 how to rename branches
+11 how to delete branch
+12 what are resets
+13 how to merge
+14 what are merge conflicts and how to fix?
+15 tactics to reduce conflicts 
+16 what is stashing, how to do it
+17 how to deal with remote repo
+
+As
+1 
+stores info in .git/HEAD and .git/refs/heads/master
+git show HEAD
+
+2
+the previous commits leading to the current one
+parent = sha1^  v  sha1~
+grandparent = sha1^^  v  sha1~2
+
+3 
+tree = a directory at a given time
+tree-ish = a pointer to a tree
+
+4 binary large object (not a tree)
+
+5 shows contents of tree of a tree-ish
+
+6 
+-N to show last N
+--since=Y-M-D show last since date
+--until=T-M-D 2.weeks 5.days
+--author=""
+--grep=""
+sha1..sha2
+fname, directory
+-p shows all changes (like diff)
+--stat (stats about changes)
+--format=shrot/long/medium/fuller/email/raw
+--online (single lie)
+--graph (all commits graphed)
+--graph --all --oneline --decorate
+
+7 git checkout branchname
+  git checkout -b branchname
+  git branch branchname
+
+8 
+  if changes in working directory conflict (tracked files have conflicts)
+  (1) commit changes in current branch
+  (2) remove the changes
+  (3) stash the changes
+
+9 git branch --merged  v  --no-merged
+
+10 git branch -m newbranch
+
+11 git branch -d (-D if not merged and you are sure you want to lose that code)
+
+12 change files in staging index and working directory to state they had when the specified commit was made
+	soft: git reset --soft treeish  (moves HEAD pointer, but no changes to staging index or working d.)
+	mixed: git reset --mixed treeish (moves HEAD, chnages staging, no change to working)
+	hard: git reset --hard treeish (moves HEAD, changes staging, chnages working)
+
+13 git merge branchname
+
+14 
+  when same line gets modified in two branches;
+  (1) abort
+  (2) resolve manually
+  (3) use merge tool
+
+15
+  (1) keep lines short
+  (2) keep commits small and focused
+  (3) no edits to whitespace (spcae, tabs, return)
+  (4) merge often (feature flagging)
+  (5) merge from master often (tracking)
+
+16
+  git stash save "descriptive label"
+  git stash list
+  git stash show stash@{index}    w/ -p to show actual change
+  git stash clear
+  git stash drop stash@{index}
+
+17 
+  git push remoteBranch localBranch
+  git fetch
+  git merge remoteBranch
+  git pull
