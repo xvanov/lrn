@@ -1,0 +1,11 @@
+Qs
+1 why force push
+2
+
+As
+1 
+  local version is better than remote
+  remote version went wrong and needs repair
+  versions have diverged and merging is undesirabl
+2
+

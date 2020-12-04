@@ -1,0 +1,189 @@
+二。一。二。一
+
+qs
+2 basics
+2.1 roslaunch syntax
+2.2 package
+2.3 node tag
+2.4 catkin_ws
+2.5 create a package
+2.6 create a program
+2.7 refresh ros package list
+2.8 rosnode 
+2.9 compile package
+2.10 parameter server
+2.11 get ^ set parameters
+2.12 roscore
+2.13 important environment vars
+
+3 publisher
+3.1 ros topics
+3.2 manage ros topics
+3.3 publisher
+3.4 create publisher
+3.5 topic messages
+3.6 publisher program
+
+4 subscriber
+4.1 subscriber
+4.2 create a subscriber
+4.3 create own message
+4.4 publish to topic via ros command
+
+5 service client
+5.1 service
+5.2 action vs service
+5.3 manage services
+5.4 call a service
+5.5 interact programatically with service
+5.6 basic service program
+
+6 service server
+6.1 steps to give a service
+6.2 steps to create own service message
+6.3 mistake: after compiling custom srv : cannot call service
+
+7 oop 
+7.1 oop service
+
+8 action client
+8.1 action
+8.2 manage actions
+8.3 call action server
+
+9 action server
+
+
+as
+2 basics
+2.1 roslaunch <package name> <launch file name>
+2.2 a collection of ros files for a program: CMakeLists.txt, package.xml
+src, launch, msg, srv
+2.3 <node pkg="package name" type="code filename" name="node name" output=""> 
+</node>
+2.4 directory where ROS finds local made packages
+2.5 catkin_create_pkg <package name> <dependencies>
+2.6 
+create package 
+py file src
+launch file in launch
+roslaunch ...
+2.7 rospack list
+2.8 ROS program
+    rosnode list
+    rosnode info <node name>
+2.9 catkin_make
+    catkin_make --only-pkg-with-deps <package name>
+2.10 dictionary of ROS parameters
+     rosparam list
+2.11 param set <param name> "value"
+     param get <param name>    
+2.12 main process that has to run 
+2.13 ROS_MASTER_URI
+     ROS_PACKAGE_PATH
+
+3 publisher
+3.1 pipes where you can read from or write to 
+3.2 rostopic list
+    rostopic info <topic name>
+3.3 node that publishes to topic
+3.4 rospy.Publisher("name", message_type, queue_size)
+3.5 structured information defines in .msg file
+    rosmsg show <msg name>
+3.6 
+import rospy
+from messages import MessageType
+rospy.init_node('topic_publisher')
+pub = rospy.Publisher("name", MessageType, queue_size=1)
+rate = rospy.Rate(2) # 2 Hz
+while not rospy.is_shutdown():
+   pub.publish(message)
+   rate.sleep
+
+4 subscriber
+4.1 node that reads from topic
+4.2 rospy.Subscriber("name", MessgeType, callback_function)
+4.3 
+.msg in msg directory
+    <type of variable> <variable name>    
+    
+CMakeLists.txt
+    find_package()        # needed packages for compilation
+    add_message_files()    # .msg file
+    generate_messges()    # packages needed for messages
+    catkin_package()    # packages needed by someone that will execute 
+                      something from my package
+
+package.xml
+    build_depend
+    build_export_depend
+    exec_depend
+
+compile
+    catkin_make
+    source devel/setup.bash
+
+4.4 rostopic pub <name of topic> <msg type> <value>
+
+
+
+5 service client
+5.1 a synchronous client-server (reques-response) program
+5.2 asynchronous vs synchronous 
+5.3 rosservice list
+    rosservice info <service name> 
+    rossrv show
+5.4 rosservice call <service name> tab-tab
+5.5 
+client = rospy.ServiceProxy(<name>, <type of message>)
+messageRequest = specially defined object
+messageRequest.parameter1 = "blah blah"
+response = client(messageRequest)
+5.6 
+init node
+define client
+get response
+rospy.wait_for_service("name")
+
+6 service server
+6.1 
+define service in python:
+    - callback function
+    - message to send to service
+    - make rosnode
+
+6.2 
+create package
+define .srv in srv
+    <var type> <name of request var>
+    ---
+    <var type> <name of response var>
+CMakeLists.txt
+    find_package()        # std_messages and message_generation
+    add_service_files()    # .srv filename
+    generate_message()    # std_messages
+    catkin_packages()    # rospy and dependencies
+
+package.xml
+    build_depend
+    build_export_depend
+    exec_depend
+
+6.3 
+    run soruce devel/setup.bash in all shells
+
+7 oop 
+7.1 oop service
+
+8 action client
+8.1 asynchronous code executed with 3 mandatory fields
+input: goal
+outputs: result, feedback (once in a while message giving state of action)
+
+8.2 manage actions
+8.3 call action server
+
+9 action server
+
+
+
